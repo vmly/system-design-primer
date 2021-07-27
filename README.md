@@ -327,10 +327,10 @@ First, you'll need a basic understanding of common principles, learning about wh
 [Scalability](http://www.lecloud.net/tagged/scalability/chrono)
 
 * Topics covered:
-    * [Clones](http://www.lecloud.net/post/7295452622/scalability-for-dummies-part-1-clones)
-    * [Databases](http://www.lecloud.net/post/7994751381/scalability-for-dummies-part-2-database)
-    * [Caches](http://www.lecloud.net/post/9246290032/scalability-for-dummies-part-3-cache)
-    * [Asynchronism](http://www.lecloud.net/post/9699762917/scalability-for-dummies-part-4-asynchronism)
+    * [~~Clones~~](http://www.lecloud.net/post/7295452622/scalability-for-dummies-part-1-clones)
+    * [~~Databases~~](http://www.lecloud.net/post/7994751381/scalability-for-dummies-part-2-database)
+    * [~~Caches~~](http://www.lecloud.net/post/9246290032/scalability-for-dummies-part-3-cache)
+    * [~~Asynchronism~~](http://www.lecloud.net/post/9699762917/scalability-for-dummies-part-4-asynchronism)
 
 ### Next steps
 
@@ -344,7 +344,7 @@ Keep in mind that **everything is a trade-off**.
 
 Then we'll dive into more specific topics such as DNS, CDNs, and load balancers.
 
-## Performance vs scalability
+## Performance vs scalability ~~[DONE]~~
 
 A service is **scalable** if it results in increased **performance** in a manner proportional to resources added. Generally, increasing performance means serving more units of work, but it can also be to handle larger units of work, such as when datasets grow.<sup><a href=http://www.allthingsdistributed.com/2006/03/a_word_on_scalability.html>1</a></sup>
 
@@ -355,8 +355,8 @@ Another way to look at performance vs scalability:
 
 ### Source(s) and further reading
 
-* [A word on scalability](http://www.allthingsdistributed.com/2006/03/a_word_on_scalability.html)
-* [Scalability, availability, stability, patterns](http://www.slideshare.net/jboner/scalability-availability-stability-patterns/)
+* [A word on scalability](http://www.allthingsdistributed.com/2006/03/a_word_on_scalability.html) ~~[DONE]~~
+* [Scalability, availability, stability, patterns](http://www.slideshare.net/jboner/scalability-availability-stability-patterns/) ~~[DONE, REVISIT]~~
 
 ## Latency vs throughput
 
@@ -368,7 +368,7 @@ Generally, you should aim for **maximal throughput** with **acceptable latency**
 
 ### Source(s) and further reading
 
-* [Understanding latency vs throughput](https://community.cadence.com/cadence_blogs_8/b/sd/archive/2010/09/13/understanding-latency-vs-throughput)
+* [Understanding latency vs throughput](https://community.cadence.com/cadence_blogs_8/b/sd/archive/2010/09/13/understanding-latency-vs-throughput) ~~[DONE]~~
 
 ## Availability vs consistency
 
