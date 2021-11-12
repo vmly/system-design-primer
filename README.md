@@ -32,87 +32,172 @@ Additional topics for interview prep:
   <br/>
 </p>
 
-* [System design topics: start here](#system-design-topics-start-here)
-    * [Step 1: Review the scalability video lecture](#step-1-review-the-scalability-video-lecture)
-    * [Step 2: Review the scalability article](#step-2-review-the-scalability-article)
-    * [Next steps](#next-steps)
-* [Performance vs scalability](#performance-vs-scalability)
-* [Latency vs throughput](#latency-vs-throughput)
-* [Availability vs consistency](#availability-vs-consistency)
-    * [CAP theorem](#cap-theorem)
-        * [CP - consistency and partition tolerance](#cp---consistency-and-partition-tolerance)
-        * [AP - availability and partition tolerance](#ap---availability-and-partition-tolerance)
-* [Consistency patterns](#consistency-patterns)
-    * [Weak consistency](#weak-consistency)
-    * [Eventual consistency](#eventual-consistency)
-    * [Strong consistency](#strong-consistency)
-* [Availability patterns](#availability-patterns)
-    * [Fail-over](#fail-over)
-    * [Replication](#replication)
-    * [Availability in numbers](#availability-in-numbers)
-* [Domain name system](#domain-name-system)
-* [Content delivery network](#content-delivery-network)
-    * [Push CDNs](#push-cdns)
-    * [Pull CDNs](#pull-cdns)
-* [Load balancer](#load-balancer)
-    * [Active-passive](#active-passive)
-    * [Active-active](#active-active)
-    * [Layer 4 load balancing](#layer-4-load-balancing)
-    * [Layer 7 load balancing](#layer-7-load-balancing)
-    * [Horizontal scaling](#horizontal-scaling)
-* [Reverse proxy (web server)](#reverse-proxy-web-server)
-    * [Load balancer vs reverse proxy](#load-balancer-vs-reverse-proxy)
-* [Application layer](#application-layer)
-    * [Microservices](#microservices)
-    * [Service discovery](#service-discovery)
-* [Database](#database)
-    * [Relational database management system (RDBMS)](#relational-database-management-system-rdbms)
-        * [Master-slave replication](#master-slave-replication)
-        * [Master-master replication](#master-master-replication)
-        * [Federation](#federation)
-        * [Sharding](#sharding)
-        * [Denormalization](#denormalization)
-        * [SQL tuning](#sql-tuning)
-    * [NoSQL](#nosql)
-        * [Key-value store](#key-value-store)
-        * [Document store](#document-store)
-        * [Wide column store](#wide-column-store)
-        * [Graph Database](#graph-database)
-    * [SQL or NoSQL](#sql-or-nosql)
-* [Cache](#cache)
-    * [Client caching](#client-caching)
-    * [CDN caching](#cdn-caching)
-    * [Web server caching](#web-server-caching)
-    * [Database caching](#database-caching)
-    * [Application caching](#application-caching)
-    * [Caching at the database query level](#caching-at-the-database-query-level)
-    * [Caching at the object level](#caching-at-the-object-level)
-    * [When to update the cache](#when-to-update-the-cache)
-        * [Cache-aside](#cache-aside)
-        * [Write-through](#write-through)
-        * [Write-behind (write-back)](#write-behind-write-back)
-        * [Refresh-ahead](#refresh-ahead)
-* [Asynchronism](#asynchronism)
-    * [Message queues](#message-queues)
-    * [Task queues](#task-queues)
-    * [Back pressure](#back-pressure)
-* [Communication](#communication)
-    * [Transmission control protocol (TCP)](#transmission-control-protocol-tcp)
-    * [User datagram protocol (UDP)](#user-datagram-protocol-udp)
-    * [Remote procedure call (RPC)](#remote-procedure-call-rpc)
-    * [Representational state transfer (REST)](#representational-state-transfer-rest)
-* [Security](#security)
-* [Appendix](#appendix)
-    * [Powers of two table](#powers-of-two-table)
-    * [Latency numbers every programmer should know](#latency-numbers-every-programmer-should-know)
-    * [Additional system design interview questions](#additional-system-design-interview-questions)
-    * [Real world architectures](#real-world-architectures)
-    * [Company architectures](#company-architectures)
-    * [Company engineering blogs](#company-engineering-blogs)
-* [Under development](#under-development)
-* [Credits](#credits)
-* [Contact info](#contact-info)
-* [License](#license)
+- [The System Design Primer](#the-system-design-primer)
+    - [Prep for the system design interview](#prep-for-the-system-design-interview)
+  - [Index of system design topics](#index-of-system-design-topics)
+  - [Study guide](#study-guide)
+  - [How to approach a system design interview question](#how-to-approach-a-system-design-interview-question)
+    - [Step 1: Outline use cases, constraints, and assumptions](#step-1-outline-use-cases-constraints-and-assumptions)
+    - [Step 2: Create a high level design](#step-2-create-a-high-level-design)
+    - [Step 3: Design core components](#step-3-design-core-components)
+    - [Step 4: Scale the design](#step-4-scale-the-design)
+    - [Back-of-the-envelope calculations](#back-of-the-envelope-calculations)
+    - [Source(s) and further reading](#sources-and-further-reading)
+  - [System design interview questions with solutions](#system-design-interview-questions-with-solutions)
+    - [Design Pastebin.com (or Bit.ly)](#design-pastebincom-or-bitly)
+    - [Design the Twitter timeline and search (or Facebook feed and search)](#design-the-twitter-timeline-and-search-or-facebook-feed-and-search)
+    - [Design a web crawler](#design-a-web-crawler)
+    - [Design Mint.com](#design-mintcom)
+    - [Design the data structures for a social network](#design-the-data-structures-for-a-social-network)
+    - [Design a key-value store for a search engine](#design-a-key-value-store-for-a-search-engine)
+    - [Design Amazon's sales ranking by category feature](#design-amazons-sales-ranking-by-category-feature)
+    - [Design a system that scales to millions of users on AWS](#design-a-system-that-scales-to-millions-of-users-on-aws)
+  - [Object-oriented design interview questions with solutions](#object-oriented-design-interview-questions-with-solutions)
+  - [System design topics: start here](#system-design-topics-start-here)
+    - [~~Step 1: Review the scalability video lecture~~](#step-1-review-the-scalability-video-lecture)
+    - [Step 2: Review the scalability article](#step-2-review-the-scalability-article)
+    - [Next steps](#next-steps)
+  - [Performance vs scalability ~~[DONE]~~](#performance-vs-scalability-done)
+    - [Source(s) and further reading](#sources-and-further-reading-1)
+  - [Latency vs throughput](#latency-vs-throughput)
+    - [Source(s) and further reading](#sources-and-further-reading-2)
+  - [Availability vs consistency](#availability-vs-consistency)
+    - [CAP theorem ~~[DONE]~~](#cap-theorem-done)
+      - [CP - consistency and partition tolerance ~~[DONE]~~](#cp---consistency-and-partition-tolerance-done)
+      - [AP - availability and partition tolerance ~~[DONE]~~](#ap---availability-and-partition-tolerance-done)
+    - [Source(s) and further reading](#sources-and-further-reading-3)
+  - [Consistency patterns](#consistency-patterns)
+    - [Weak consistency](#weak-consistency)
+    - [Eventual consistency](#eventual-consistency)
+    - [Strong consistency](#strong-consistency)
+    - [Source(s) and further reading](#sources-and-further-reading-4)
+  - [Availability patterns ~~[DONE]~~](#availability-patterns-done)
+    - [Fail-over ~~[DONE]~~](#fail-over-done)
+      - [Active-passive](#active-passive)
+      - [Active-active](#active-active)
+    - [Disadvantage(s): failover](#disadvantages-failover)
+    - [Replication ~~[DONE]~~](#replication-done)
+      - [Master-slave and master-master](#master-slave-and-master-master)
+    - [Availability in numbers](#availability-in-numbers)
+      - [99.9% availability - three 9s](#999-availability---three-9s)
+      - [99.99% availability - four 9s](#9999-availability---four-9s)
+      - [Availability in parallel vs in sequence](#availability-in-parallel-vs-in-sequence)
+          - [In sequence](#in-sequence)
+          - [In parallel](#in-parallel)
+  - [Domain name system ~~[DONE]~~](#domain-name-system-done)
+    - [Disadvantage(s): DNS](#disadvantages-dns)
+    - [Source(s) and further reading](#sources-and-further-reading-5)
+  - [Content delivery network ~~[DONE]~~](#content-delivery-network-done)
+    - [Push CDNs ~~[DONE]~~](#push-cdns-done)
+    - [Pull CDNs ~~[DONE]~~](#pull-cdns-done)
+    - [Disadvantage(s): CDN](#disadvantages-cdn)
+    - [Source(s) and further reading](#sources-and-further-reading-6)
+  - [Load balancer ~~[DONE]~~](#load-balancer-done)
+    - [Layer 4 load balancing](#layer-4-load-balancing)
+    - [Layer 7 load balancing](#layer-7-load-balancing)
+    - [Horizontal scaling](#horizontal-scaling)
+      - [Disadvantage(s): horizontal scaling](#disadvantages-horizontal-scaling)
+    - [Disadvantage(s): load balancer](#disadvantages-load-balancer)
+    - [Source(s) and further reading](#sources-and-further-reading-7)
+  - [Reverse proxy (web server) ~~[DONE]~~](#reverse-proxy-web-server-done)
+    - [Load balancer vs reverse proxy ~~[DONE]~~](#load-balancer-vs-reverse-proxy-done)
+    - [Disadvantage(s): reverse proxyv ~~[DONE]~~](#disadvantages-reverse-proxyv-done)
+    - [Source(s) and further reading](#sources-and-further-reading-8)
+  - [Application layer ~~[DONE]~~](#application-layer-done)
+    - [Microservices ~~[DONE]~~](#microservices-done)
+    - [Service Discovery ~~[DONE]~~](#service-discovery-done)
+    - [Disadvantage(s): application layer](#disadvantages-application-layer)
+    - [Source(s) and further reading](#sources-and-further-reading-9)
+  - [Database  ~~[DONE]~~](#database--done)
+    - [Relational database management system (RDBMS)  ~~[DONE]~~](#relational-database-management-system-rdbms--done)
+      - [Master-slave replication](#master-slave-replication)
+        - [Disadvantage(s): master-slave replication](#disadvantages-master-slave-replication)
+      - [Master-master replication](#master-master-replication)
+        - [Disadvantage(s): master-master replication](#disadvantages-master-master-replication)
+        - [Disadvantage(s): replication](#disadvantages-replication)
+        - [Source(s) and further reading: replication](#sources-and-further-reading-replication)
+      - [Federation  ~~[DONE]~~](#federation--done)
+        - [Disadvantage(s): federation](#disadvantages-federation)
+        - [Source(s) and further reading: federation](#sources-and-further-reading-federation)
+      - [Sharding  ~~[DONE]~~](#sharding--done)
+        - [Disadvantage(s): sharding](#disadvantages-sharding)
+        - [Source(s) and further reading: sharding](#sources-and-further-reading-sharding)
+      - [Denormalization  ~~[DONE]~~](#denormalization--done)
+        - [Disadvantage(s): denormalization](#disadvantages-denormalization)
+          - [Source(s) and further reading: denormalization](#sources-and-further-reading-denormalization)
+      - [SQL tuning  ~~[TO READ]~~](#sql-tuning--to-read)
+        - [Tighten up the schema](#tighten-up-the-schema)
+        - [Use good indices](#use-good-indices)
+        - [Avoid expensive joins](#avoid-expensive-joins)
+        - [Partition tables](#partition-tables)
+        - [Tune the query cache](#tune-the-query-cache)
+        - [Source(s) and further reading: SQL tuning](#sources-and-further-reading-sql-tuning)
+    - [NoSQL](#nosql)
+      - [Key-value store](#key-value-store)
+        - [Source(s) and further reading: key-value store](#sources-and-further-reading-key-value-store)
+      - [Document store](#document-store)
+        - [Source(s) and further reading: document store](#sources-and-further-reading-document-store)
+      - [Wide column store](#wide-column-store)
+        - [Source(s) and further reading: wide column store](#sources-and-further-reading-wide-column-store)
+      - [Graph database](#graph-database)
+        - [Source(s) and further reading: graph](#sources-and-further-reading-graph)
+      - [Source(s) and further reading: NoSQL](#sources-and-further-reading-nosql)
+    - [SQL or NoSQL](#sql-or-nosql)
+        - [Source(s) and further reading: SQL or NoSQL](#sources-and-further-reading-sql-or-nosql)
+  - [Cache](#cache)
+    - [Client caching](#client-caching)
+    - [CDN caching](#cdn-caching)
+    - [Web server caching](#web-server-caching)
+    - [Database caching](#database-caching)
+    - [Application caching](#application-caching)
+    - [Caching at the database query level](#caching-at-the-database-query-level)
+    - [Caching at the object level](#caching-at-the-object-level)
+    - [When to update the cache](#when-to-update-the-cache)
+      - [Cache-aside](#cache-aside)
+        - [Disadvantage(s): cache-aside](#disadvantages-cache-aside)
+      - [Write-through](#write-through)
+        - [Disadvantage(s): write through](#disadvantages-write-through)
+      - [Write-behind (write-back)](#write-behind-write-back)
+        - [Disadvantage(s): write-behind](#disadvantages-write-behind)
+      - [Refresh-ahead](#refresh-ahead)
+        - [Disadvantage(s): refresh-ahead](#disadvantages-refresh-ahead)
+    - [Disadvantage(s): cache](#disadvantages-cache)
+    - [Source(s) and further reading](#sources-and-further-reading-10)
+  - [Asynchronism](#asynchronism)
+    - [Message queues](#message-queues)
+    - [Task queues](#task-queues)
+    - [Back pressure](#back-pressure)
+    - [Disadvantage(s): asynchronism](#disadvantages-asynchronism)
+    - [Source(s) and further reading](#sources-and-further-reading-11)
+  - [Communication](#communication)
+    - [Hypertext transfer protocol (HTTP)](#hypertext-transfer-protocol-http)
+      - [Source(s) and further reading: HTTP](#sources-and-further-reading-http)
+    - [Transmission control protocol (TCP)](#transmission-control-protocol-tcp)
+    - [User datagram protocol (UDP)](#user-datagram-protocol-udp)
+      - [Source(s) and further reading: TCP and UDP](#sources-and-further-reading-tcp-and-udp)
+    - [Remote procedure call (RPC)](#remote-procedure-call-rpc)
+      - [Disadvantage(s): RPC](#disadvantages-rpc)
+    - [Representational state transfer (REST)](#representational-state-transfer-rest)
+      - [Disadvantage(s): REST](#disadvantages-rest)
+    - [RPC and REST calls comparison](#rpc-and-rest-calls-comparison)
+      - [Source(s) and further reading: REST and RPC](#sources-and-further-reading-rest-and-rpc)
+  - [Security](#security)
+    - [Source(s) and further reading](#sources-and-further-reading-12)
+  - [Appendix](#appendix)
+    - [Powers of two table](#powers-of-two-table)
+      - [Source(s) and further reading](#sources-and-further-reading-13)
+    - [Latency numbers every programmer should know](#latency-numbers-every-programmer-should-know)
+      - [Latency numbers visualized](#latency-numbers-visualized)
+      - [Source(s) and further reading](#sources-and-further-reading-14)
+    - [Additional system design interview questions](#additional-system-design-interview-questions)
+    - [Real world architectures](#real-world-architectures)
+    - [Company architectures](#company-architectures)
+    - [Company engineering blogs](#company-engineering-blogs)
+      - [Source(s) and further reading](#sources-and-further-reading-15)
+  - [Under development](#under-development)
+  - [Credits](#credits)
+  - [Contact info](#contact-info)
+  - [License](#license)
 
 ## Study guide
 
@@ -372,7 +457,7 @@ Generally, you should aim for **maximal throughput** with **acceptable latency**
 
 ## Availability vs consistency
 
-### CAP theorem
+### CAP theorem ~~[DONE]~~
 
 <p align="center">
   <img src="images/bgLMI2u.png">
@@ -388,11 +473,11 @@ In a distributed computer system, you can only support two of the following guar
 
 *Networks aren't reliable, so you'll need to support partition tolerance.  You'll need to make a software tradeoff between consistency and availability.*
 
-#### CP - consistency and partition tolerance
+#### CP - consistency and partition tolerance ~~[DONE]~~
 
 Waiting for a response from the partitioned node might result in a timeout error.  CP is a good choice if your business needs require atomic reads and writes.
 
-#### AP - availability and partition tolerance
+#### AP - availability and partition tolerance ~~[DONE]~~
 
 Responses return the most readily available version of the data available on any node, which might not be the latest.  Writes might take some time to propagate when the partition is resolved.
 
@@ -400,10 +485,10 @@ AP is a good choice if the business needs allow for [eventual consistency](#even
 
 ### Source(s) and further reading
 
-* [CAP theorem revisited](http://robertgreiner.com/2014/08/cap-theorem-revisited/)
-* [A plain english introduction to CAP theorem](http://ksat.me/a-plain-english-introduction-to-cap-theorem)
-* [CAP FAQ](https://github.com/henryr/cap-faq)
-* [The CAP theorem](https://www.youtube.com/watch?v=k-Yaq8AHlFA)
+* [CAP theorem revisited](http://robertgreiner.com/2014/08/cap-theorem-revisited/) ~~[DONE]~~
+* [A plain english introduction to CAP theorem](http://ksat.me/a-plain-english-introduction-to-cap-theorem) ~~[DONE]~~
+* [CAP FAQ](https://github.com/henryr/cap-faq) ~~[DONE]~~
+* [The CAP theorem](https://www.youtube.com/watch?v=k-Yaq8AHlFA) ~~[DONE]~~
 
 ## Consistency patterns
 
@@ -431,11 +516,11 @@ This approach is seen in file systems and RDBMSes.  Strong consistency works wel
 
 * [Transactions across data centers](http://snarfed.org/transactions_across_datacenters_io.html)
 
-## Availability patterns
+## Availability patterns ~~[DONE]~~
 
 There are two complementary patterns to support high availability: **fail-over** and **replication**.
 
-### Fail-over
+### Fail-over ~~[DONE]~~
 
 #### Active-passive
 
@@ -458,7 +543,7 @@ Active-active failover can also be referred to as master-master failover.
 * Fail-over adds more hardware and additional complexity.
 * There is a potential for loss of data if the active system fails before any newly written data can be replicated to the passive.
 
-### Replication
+### Replication ~~[DONE]~~
 
 #### Master-slave and master-master
 
@@ -513,7 +598,7 @@ Availability (Total) = 1 - (1 - Availability (Foo)) * (1 - Availability (Bar))
 
 If both `Foo` and `Bar` each had 99.9% availability, their total availability in parallel would be 99.9999%.
 
-## Domain name system
+## Domain name system ~~[DONE]~~
 
 <p align="center">
   <img src="images/IOyLj4i.jpg">
@@ -551,7 +636,7 @@ Services such as [CloudFlare](https://www.cloudflare.com/dns/) and [Route 53](ht
 * [Wikipedia](https://en.wikipedia.org/wiki/Domain_Name_System)
 * [DNS articles](https://support.dnsimple.com/categories/dns/)
 
-## Content delivery network
+## Content delivery network ~~[DONE]~~
 
 <p align="center">
   <img src="images/h9TAuGI.jpg">
@@ -566,13 +651,13 @@ Serving content from CDNs can significantly improve performance in two ways:
 * Users receive content from data centers close to them
 * Your servers do not have to serve requests that the CDN fulfills
 
-### Push CDNs
+### Push CDNs ~~[DONE]~~
 
 Push CDNs receive new content whenever changes occur on your server.  You take full responsibility for providing content, uploading directly to the CDN and rewriting URLs to point to the CDN.  You can configure when content expires and when it is updated.  Content is uploaded only when it is new or changed, minimizing traffic, but maximizing storage.
 
 Sites with a small amount of traffic or sites with content that isn't often updated work well with push CDNs.  Content is placed on the CDNs once, instead of being re-pulled at regular intervals.
 
-### Pull CDNs
+### Pull CDNs ~~[DONE]~~
 
 Pull CDNs grab new content from your server when the first user requests the content.  You leave the content on your server and rewrite URLs to point to the CDN.  This results in a slower request until the content is cached on the CDN.
 
@@ -592,7 +677,7 @@ Sites with heavy traffic work well with pull CDNs, as traffic is spread out more
 * [The differences between push and pull CDNs](http://www.travelblogadvice.com/technical/the-differences-between-push-and-pull-cdns/)
 * [Wikipedia](https://en.wikipedia.org/wiki/Content_delivery_network)
 
-## Load balancer
+## Load balancer ~~[DONE]~~
 
 <p align="center">
   <img src="images/h81n9iK.png">
@@ -662,7 +747,7 @@ Load balancers can also help with horizontal scaling, improving performance and 
 * [Layer 7 load balancing](https://www.nginx.com/resources/glossary/layer-7-load-balancing/)
 * [ELB listener config](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html)
 
-## Reverse proxy (web server)
+## Reverse proxy (web server) ~~[DONE]~~
 
 <p align="center">
   <img src="images/n41Azff.png">
@@ -687,13 +772,13 @@ Additional benefits include:
     * Videos
     * Etc
 
-### Load balancer vs reverse proxy
+### Load balancer vs reverse proxy ~~[DONE]~~
 
 * Deploying a load balancer is useful when you have multiple servers.  Often, load balancers  route traffic to a set of servers serving the same function.
 * Reverse proxies can be useful even with just one web server or application server, opening up the benefits described in the previous section.
 * Solutions such as NGINX and HAProxy can support both layer 7 reverse proxying and load balancing.
 
-### Disadvantage(s): reverse proxy
+### Disadvantage(s): reverse proxyv ~~[DONE]~~
 
 * Introducing a reverse proxy results in increased complexity.
 * A single reverse proxy is a single point of failure, configuring multiple reverse proxies (ie a [failover](https://en.wikipedia.org/wiki/Failover)) further increases complexity.
@@ -705,7 +790,7 @@ Additional benefits include:
 * [HAProxy architecture guide](http://www.haproxy.org/download/1.2/doc/architecture.txt)
 * [Wikipedia](https://en.wikipedia.org/wiki/Reverse_proxy)
 
-## Application layer
+## Application layer ~~[DONE]~~
 
 <p align="center">
   <img src="images/yB5SYwm.png">
@@ -717,13 +802,13 @@ Separating out the web layer from the application layer (also known as platform 
 
 Workers in the application layer also help enable [asynchronism](#asynchronism).
 
-### Microservices
+### Microservices ~~[DONE]~~
 
 Related to this discussion are [microservices](https://en.wikipedia.org/wiki/Microservices), which can be described as a suite of independently deployable, small, modular services.  Each service runs a unique process and communicates through a well-defined, lightweight mechanism to serve a business goal. <sup><a href=https://smartbear.com/learn/api-design/what-are-microservices>1</a></sup>
 
 Pinterest, for example, could have the following microservices: user profile, follower, feed, search, photo upload, etc.
 
-### Service Discovery
+### Service Discovery ~~[DONE]~~
 
 Systems such as [Consul](https://www.consul.io/docs/index.html), [Etcd](https://coreos.com/etcd/docs/latest), and [Zookeeper](http://www.slideshare.net/sauravhaloi/introduction-to-apache-zookeeper) can help services find each other by keeping track of registered names, addresses, and ports.  [Health checks](https://www.consul.io/intro/getting-started/checks.html) help verify service integrity and are often done using an [HTTP](#hypertext-transfer-protocol-http) endpoint.  Both Consul and Etcd have a built in [key-value store](#key-value-store) that can be useful for storing config values and other shared data.
 
@@ -740,7 +825,7 @@ Systems such as [Consul](https://www.consul.io/docs/index.html), [Etcd](https://
 * [Introduction to Zookeeper](http://www.slideshare.net/sauravhaloi/introduction-to-apache-zookeeper)
 * [Here's what you need to know about building microservices](https://cloudncode.wordpress.com/2016/07/22/msa-getting-started/)
 
-## Database
+## Database  ~~[DONE]~~
 
 <p align="center">
   <img src="images/Xkm5CXz.png">
@@ -748,7 +833,7 @@ Systems such as [Consul](https://www.consul.io/docs/index.html), [Etcd](https://
   <i><a href=https://www.youtube.com/watch?v=kKjm4ehYiMs>Source: Scaling up to your first 10 million users</a></i>
 </p>
 
-### Relational database management system (RDBMS)
+### Relational database management system (RDBMS)  ~~[DONE]~~
 
 A relational database like SQL is a collection of data items organized in tables.
 
@@ -806,7 +891,7 @@ Both masters serve reads and writes and coordinate with each other on writes.  I
 * [Scalability, availability, stability, patterns](http://www.slideshare.net/jboner/scalability-availability-stability-patterns/)
 * [Multi-master replication](https://en.wikipedia.org/wiki/Multi-master_replication)
 
-#### Federation
+#### Federation  ~~[DONE]~~
 
 <p align="center">
   <img src="images/U3qV33e.png">
@@ -827,7 +912,7 @@ Federation (or functional partitioning) splits up databases by function.  For ex
 
 * [Scaling up to your first 10 million users](https://www.youtube.com/watch?v=kKjm4ehYiMs)
 
-#### Sharding
+#### Sharding  ~~[DONE]~~
 
 <p align="center">
   <img src="images/wU8x5Id.png">
@@ -855,7 +940,7 @@ Common ways to shard a table of users is either through the user's last name ini
 * [Shard database architecture](https://en.wikipedia.org/wiki/Shard_(database_architecture))
 * [Consistent hashing](http://www.paperplanes.de/2011/12/9/the-magic-of-consistent-hashing.html)
 
-#### Denormalization
+#### Denormalization  ~~[DONE]~~
 
 Denormalization attempts to improve read performance at the expense of some write performance.  Redundant copies of the data are written in multiple tables to avoid expensive joins.  Some RDBMS such as [PostgreSQL](https://en.wikipedia.org/wiki/PostgreSQL) and Oracle support [materialized views](https://en.wikipedia.org/wiki/Materialized_view) which handle the work of storing redundant information and keeping redundant copies consistent.
 
@@ -873,7 +958,7 @@ In most systems, reads can heavily outnumber writes 100:1 or even 1000:1.  A rea
 
 * [Denormalization](https://en.wikipedia.org/wiki/Denormalization)
 
-#### SQL tuning
+#### SQL tuning  ~~[TO READ]~~
 
 SQL tuning is a broad topic and many [books](https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=sql+tuning) have been written as reference.
 
